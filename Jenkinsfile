@@ -1,12 +1,16 @@
 env.DIST = 'xenial'
 env.PWD_BIND = '/workspace'
-env.TYPE = switch(env.BRANCH_NAME) {
-  case 'Neon/user': 'useredition'; break;
-  default: error "Could not map ${env.BRANCH_NAME} to a test edition."
-}
+env.TYPE = inferType()
 
 if (env.TYPE == null) {
   error 'TYPE param not set. Cannot run install test without a type.'
+}
+
+def inferType() {
+  switch(env.BRANCH_NAME) {
+    case 'Neon/user': return 'useredition';
+    default: error "Could not map ${env.BRANCH_NAME} to a test edition."
+  }
 }
 
 node {
