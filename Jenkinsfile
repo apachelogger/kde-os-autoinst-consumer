@@ -13,8 +13,8 @@ openQANode {
   }
   stage('tree[wget]') {
     sh 'ls -lah'
-    sh "wget -q http://metadata.neon.kde.org/os-autoinst/${env.TYPE}.tar"
-    sh "wget -q http://metadata.neon.kde.org/os-autoinst/${env.TYPE}.tar.sig"
+    sh "wget -q https://metadata.neon.kde.org/os-autoinst/${env.TYPE}.tar"
+    sh "wget -q https://metadata.neon.kde.org/os-autoinst/${env.TYPE}.tar.sig"
   }
   parallel(
     "tree[verify]": {
